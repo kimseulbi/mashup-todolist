@@ -75,7 +75,6 @@ function TodoCreate() {
   const [open, setOpen] = useState(false);
   const onToggle = () => setOpen(!open);
 
-  console.log(open);
   return (
     <>
       {open && (
