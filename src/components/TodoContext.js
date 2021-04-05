@@ -45,6 +45,12 @@ function todoReducer(state, action) {
   }
 }
 
+/* 
+state위한 dispatch위한 Context를 만들었는데
+나중에 최적화를 위함 
+ ex) TodoCreate에서는 dispatch만 필요함.그런데 한 context안에 state, dispatch를 넣어두면 불필요한 렌더링응 하게됨
+*/
+
 const TodoStateContext = createContext();
 const TodoDispatchContext = createContext();
 const TodoNextIdContext = createContext();
