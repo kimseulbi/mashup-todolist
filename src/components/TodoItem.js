@@ -1,6 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { MdDone, MdDelete } from "react-icons/md";
+import { useTodoDispatch } from "./TodoContext";
 
 const Remove = styled.div`
   opacity: 0;
@@ -55,15 +56,31 @@ const TodoItemBlock = styled.div`
 `;
 
 function TodoItem({ id, done, text }) {
+  const dispatch = useTodoDispatch();
+  const onToggle = () =>
+    dispatch({
+      type: "TOGGLE",
+      id,
+    });
+  const onRemove = () =>
+    dispatch({
+      type: "REMOVE",
+      id,
+    });
   return (
     <TodoItemBlock>
-      <CheckCircle done={done}>{done && <MdDone />}</CheckCircle>
+      <CheckCircle done={done} onClick={onToggle}>
+        {done && <MdDone />}
+      </CheckCircle>
       <Text>{text}</Text>
-      <Remove>
+      <Remove onClick={onRemove}>
         <MdDelete />
       </Remove>
     </TodoItemBlock>
   );
 }
 
-export default TodoItem;
+/* 
+useTodoDispatch()만 불러왔기떄문에 
+React.memo로 컴포넌트 최적화가능하며 하나의 리스트아이템을 Toggleg했을때 다른 아이템의 컴포넌트들은 리랜더링 되지 않습니다. => Dispatch만 되기떄문에 즉, dispatchContext, stateContext 따로 분리해서 만들어야함 */
+export default React.memo(TodoItem);

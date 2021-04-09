@@ -10,12 +10,17 @@ const TodoListBlock = styled.div`
   overflow-y: auto;
 `;
 function TodoList() {
-  const state = useTodoState();
-  console.log(state);
+  const todos = useTodoState();
   return (
     <TodoListBlock>
-      <TodoItem text="test" done={true}></TodoItem>
-      <TodoItem text="test2" done={false}></TodoItem>
+      {todos.map((todo) => (
+        <TodoItem
+          key={todo.id}
+          id={todo.id}
+          text={todo.text}
+          done={todo.done}
+        />
+      ))}
     </TodoListBlock>
   );
 }

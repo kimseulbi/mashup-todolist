@@ -16,7 +16,7 @@ const initialTodos = [
   {
     id: 3,
     text: "Context 만들기",
-    done: false,
+    done: true,
   },
   {
     id: 4,
@@ -57,7 +57,9 @@ const TodoNextIdContext = createContext();
 
 export function TodoProvider({ children }) {
   const [state, dispatch] = useReducer(todoReducer, initialTodos);
+  /* useRef() 를 사용 할 때 파라미터를 넣어주면, 이 값이 .current 값의 기본값이 됩니다.  */
   const nextId = useRef(5);
+  console.log(nextId);
   return (
     <TodoStateContext.Provider value={state}>
       <TodoDispatchContext.Provider value={dispatch}>
@@ -77,7 +79,7 @@ export function useTodoState() {
   }
   return context;
 }
-export function TodoDispatch() {
+export function useTodoDispatch() {
   const context = useContext(TodoDispatchContext);
   if (!context) {
     throw new Error("Cannot find TodoProvider");
