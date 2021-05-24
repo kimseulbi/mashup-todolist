@@ -1,27 +1,29 @@
-import React from "react";
-import { createGlobalStyle } from "styled-components";
-import { TodoProvider } from "./components/TodoContext";
-import TodoCreate from "./components/TodoCreate";
-import TodoHead from "./components/TodoHead";
-import TodoList from "./components/TodoList";
-import TodoTemplate from "./components/TodoTemplate";
+import { Route, Link, Switch } from "react-router-dom";
+import "./lib/custom.css";
+import About from "./pages/About";
+import Home from "./pages/Home";
+import Profile from "./pages/Profile";
 
-const GlovalStyle = createGlobalStyle`
-  body{
-    background: #e9ecef;
-  }
-`;
+// exact는 "/"와 완전히 일치할때 나옴
 
 function App() {
   return (
-    <TodoProvider>
-      <GlovalStyle />
-      <TodoTemplate>
-        <TodoHead />
-        <TodoList />
-        <TodoCreate />
-      </TodoTemplate>
-    </TodoProvider>
+    <>
+      {/* Error페이지 만들때 사용  */}
+      <Switch>
+        <Route path="/" component={Home} exact />
+        <Route path="/about" component={About} />
+        <Route path="/profiles" component={Profile} />
+        <Route
+          render={({ location }) => (
+            <div>
+              <h2>이 페이지는 존재하지 않습니다.</h2>
+              <p>{location.pathname}</p>
+            </div>
+          )}
+        />
+      </Switch>
+    </>
   );
 }
 

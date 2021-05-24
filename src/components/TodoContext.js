@@ -26,6 +26,7 @@ const initialTodos = [
 ];
 
 /*
+세가지의 액션 리듀서
  CREATE: 액션안에 todo항목을 넣어서 dispatch
  TOGGLE: 모든 todo의 변환, todo.id가 action.id가 같다면 done값을 기존값의 반전값으로 업데이트, todo.id가 action.id가 다르다면 유지
  REMOVE: 모든 항목을 비교해서 일치하지 않는것만 가져오겠다
@@ -33,6 +34,9 @@ const initialTodos = [
 function todoReducer(state, action) {
   switch (action.type) {
     case "CREATE":
+      console.log(typeof state);
+      console.log(action.todo);
+      // concat: 배열을 하나의 배열로 합쳐즘
       return state.concat(action.todo);
     case "TOGGLE":
       return state.map((todo) =>
