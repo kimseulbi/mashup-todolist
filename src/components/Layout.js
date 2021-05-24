@@ -87,20 +87,6 @@ const menus = [
   },
 ];
 
-// const MenuItem = (props) => {
-//   const { data } = props;
-//   return (
-//     <>
-//       {data.map(({ key, name, href, shouldDisplay }) => {
-//         <Menu.Item key={key}>
-//           {console.log(data)}
-//           <NavLink to={href}>{name}</NavLink>
-//         </Menu.Item>;
-//       })}
-//     </>
-//   );
-// };
-
 const DefaultLayout = (props) => {
   const { Header, Sider, Content } = Layout;
   const { SubMenu } = Menu;
@@ -135,31 +121,24 @@ const DefaultLayout = (props) => {
           >
             <Menu mode="inline">
               {menus.map(({ key, name, shouldDisplay, iconNormal, sub }) => {
-                if (menus.sub !== undefined) {
+                if (sub !== undefined) {
                   return (
                     <SubMenu key={key} icon={iconNormal} title={name}>
                       {sub.map(({ key, name, href, shouldDisplay }) => {
-                        <Menu.Item key={key}>
-                          <NavLink to={href}>{name}</NavLink>
-                        </Menu.Item>;
+                        return (
+                          <Menu.Item key={key}>
+                            <NavLink to={href}>{name}</NavLink>
+                          </Menu.Item>
+                        );
                       })}
                     </SubMenu>
                   );
                 } else {
-                  return undefined;
+                  return (
+                    <SubMenu key={key} icon={iconNormal} title={name}></SubMenu>
+                  );
                 }
               })}
-              {/* <SubMenu key="sub1" icon={<MailOutlined />} title="Menu">
-                <Menu.Item key="/">
-                  <NavLink to="/">홈</NavLink>
-                </Menu.Item>
-                <Menu.Item key="about">
-                  <NavLink to="/about">소개</NavLink>
-                </Menu.Item>
-                <Menu.Item key="profiles">
-                  <NavLink to="/profiles">프로필목록</NavLink>
-                </Menu.Item>
-              </SubMenu> */}
             </Menu>
           </Sider>
           <Layout style={{ padding: "0 24px 24px" }}>
