@@ -3,6 +3,10 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
+import "./assets/images/favicon.ico";
+import "./assets/css/hns.css";
+import "./assets/css/icons.min.css";
+import "./assets/css/app.css";
 
 ReactDOM.render(
   <BrowserRouter>
